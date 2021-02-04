@@ -6,7 +6,7 @@ import {PaginationTranslator} from './PaginationTranslator';
 import {OrderByTranslator} from './OrderByTranslator';
 import {OptionsTranslator} from './OptionsTranslator';
 
-export const TranslateQuery = function(req: Request): FindManyOptions  {
+export function TranslateQuery(req: Request): FindManyOptions  {
   var options: FindManyOptions = {} as FindManyOptions;
 
   // Apply the options object from the querystring
