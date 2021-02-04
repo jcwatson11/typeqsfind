@@ -1,17 +1,23 @@
 {
    "name": "typeqsfind",
    "type": "module",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "description": "Turns express request query parameters into TypeORM FindManyOptions for use with TypeORM's Repository.find().",
    "repository": {
-     "type": "git",
-     "url": "https://github.com/jcwatson11/typeqsfind.git"
+      "type": "git",
+      "url": "https://github.com/jcwatson11/typeqsfind.git"
    },
    "bugs": {
-     "url": "https://github.com/jcwatson11/typeqsfind/issues"
+      "url": "https://github.com/jcwatson11/typeqsfind/issues"
    },
    "homepage": "https://github.com/jcwatson11/typeqsfind#readme",
-   "keywords": ["TypeORM","http","querystring","find","FindManyOptions"],
+   "keywords": [
+      "TypeORM",
+      "http",
+      "querystring",
+      "find",
+      "FindManyOptions"
+   ],
    "dependencies": {
       "@types/chai": "^4.2.14",
       "@types/dot-object": "^2.1.2",
