@@ -4,8 +4,8 @@ import "reflect-metadata";
 import {FindManyOptions} from 'typeorm';
 import {expect} from 'chai';
 import {Request} from 'express';
-import {TranslateQuery} from './index';
-const qt = TranslateQuery;
+import {typeqs} from './typeqs';
+const qt = typeqs.TranslateQuery;
 
 describe('With OptionsTranslator,', function() {
 

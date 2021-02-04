@@ -7,7 +7,7 @@ import {OrderByTranslator} from './OrderByTranslator';
 import {OptionsTranslator} from './OptionsTranslator';
 
 export class typeqs {
-  TranslateQuery(req: Request): FindManyOptions  {
+  public static TranslateQuery(req: Request): FindManyOptions  {
     var options: FindManyOptions = {} as FindManyOptions;
 
     // Apply the options object from the querystring

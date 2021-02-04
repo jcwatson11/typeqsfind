@@ -1,9 +1,11 @@
 {
    "compilerOptions": {
-      "target": "ES2017",
+      "target": "es5",
       "module": "commonjs",
-      "moduleResolution": "node",
+      "lib": ["es6"],
+      "allowJs": true,
       "outDir": "./dist",
+      "rootDir": "src",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "esModuleInterop": true,
