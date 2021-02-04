@@ -1,1 +1,0 @@
-export {TranslateQuery} from './TranslateQuery';
