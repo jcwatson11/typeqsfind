@@ -1,7 +1,7 @@
 {
    "name": "typeqsfind",
    "type": "module",
-   "version": "1.0.1",
+   "version": "1.0.2",
    "description": "Turns express request query parameters into TypeORM FindManyOptions for use with TypeORM's Repository.find().",
    "repository": {
       "type": "git",
