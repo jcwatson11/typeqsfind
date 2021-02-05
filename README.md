@@ -13,6 +13,7 @@ npm i -S typeqsfind
 The example below presumes that you have a database configured with a single table named 'user'
 
 ID | Name | Level
+---|------|------
 1 | Jon | 9
 2 | Nancy | 11
 
@@ -97,12 +98,14 @@ Consider a fundraiser schema as follows:
 ### Table Beneficiaries
 
 BenficiaryId | FirstName | LastName | Phone
+-------------|-----------|----------|------
 1 | Jon | Watson | 555-1212
 2 | Sherlock | Holmes | 555-2121
 
 ### Table Sponsors
 
 SponsorId | FirstName | LastName | Phone | AmountCommitted | BeneficiaryId
+----------|-----------|----------|-------|-----------------|--------------
 1 | Jill | Clemons | 555-1111 | 300 | 1
 2 | Fred | Baker | 555-2222 | 200 | 2
 
