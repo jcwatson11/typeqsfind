@@ -1,6 +1,5 @@
 {
    "name": "typeqsfind",
-   "type": "module",
    "version": "1.0.2",
    "description": "Turns express request query parameters into TypeORM FindManyOptions for use with TypeORM's Repository.find().",
    "repository": {
@@ -49,7 +48,8 @@
       "test": "ts-mocha -p tsconfig.json 'src/**/*.spec.ts'",
       "prepublish": "rm -rf dist && tsc --project tsconfig.json && cp dist/typeqs.d.ts src/typeqs.d.ts"
    },
-   "main": "src/typeqs.ts",
+   "main": "dist/typeqs.js",
+   "types": "dist/typeqs.d.js",
    "devDependencies": {
       "mocha-typescript": "^1.1.17"
    }
