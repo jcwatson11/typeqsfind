@@ -47,9 +47,8 @@
    "scripts": {
       "test": "ts-mocha -p tsconfig.json 'src/**/*.spec.ts'",
       "prepublish": "rm -rf dist && tsc --project tsconfig.json",
-      "coverage": "nyc npm run test && shx cp .nojekyll ./coverage/.nojekyll",
-      "typedoc": "typedoc --out ./docs --exclude \"**/*.spec.ts,**/*.d.ts\" --tsconfig ./tsconfig.json ./src",
-      "posttypedoc": "shx cp .nojekyll docs/.nojekyll"
+      "coverage": "nyc npm run test",
+      "typedoc": "typedoc --out ./docs --exclude \"**/*.spec.ts,**/*.d.ts\" --tsconfig ./tsconfig.json ./src"
    },
    "main": "dist/typeqs.js",
    "types": "dist/typeqs.d.js",
