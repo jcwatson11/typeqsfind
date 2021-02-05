@@ -1,4 +1,5 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jcwatson11/typeqsfind/CI)
+![Travis (.com)](https://img.shields.io/travis/com/jcwatson11/typeqsfind)
 
 # TypeORM Query String Translator
 
