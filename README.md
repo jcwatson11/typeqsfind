@@ -88,4 +88,25 @@ greaterthanorequalto | WHERE Level >= ? | ?greaterthanorequaltoLevel=10
 lessthan | WHERE Level < | ?lessthanLevel=10
 lessthanorequalto | WHERE Level <= | ?lessthanorequaltoLevel=10
 
+## Referencing Nested Relations
 
+Nested relations can be referenced with a dot operator between relation names and field names.
+
+Consider a fundraiser schema as follows:
+
+### Table Beneficiaries
+
+BenficiaryId | FirstName | LastName | Phone
+1 | Jon | Watson | 555-1212
+2 | Sherlock | Holmes | 555-2121
+
+### Table Sponsors
+
+SponsorId | FirstName | LastName | Phone | AmountCommitted | BeneficiaryId
+1 | Jill | Clemons | 555-1111 | 300 | 1
+2 | Fred | Baker | 555-2222 | 200 | 2
+
+```
+http://localhost:3000/beneficiaries?greaterthanSponsors.AmountCommitted=250
+// Returns Beneficiary 1
+```
