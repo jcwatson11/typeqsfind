@@ -131,5 +131,5 @@ More than one order by can be used in either syntax. But the array syntax is sim
 There are two different ways to provide an options JSON object to the request:
 
 1. As a base64 encoded string using the `options` query string parameter. `?options=base64EncodedString`
-1. As the request body. Using express bodyParser.json() is helpful for this because it automatically parses JSON input and makes it available via `request.body`.
+1. As the request body. Using express [bodyParser.json()](http://expressjs.com/en/resources/middleware/body-parser.html) is helpful for this because it automatically parses JSON input and makes it available via `request.body`.
 
