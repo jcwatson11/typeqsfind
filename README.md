@@ -37,7 +37,7 @@ app.get("/users", async (req: Request, res: Response) => {
     // myOptions is now a TypeORM FindManyOptions object taken from the query string
     let repo = getRepository(User);
     let results = await repo.find(myOptions);
-    return results;
+    res.json(results);
 });
 
 app.listen(3000);
