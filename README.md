@@ -1,5 +1,6 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jcwatson11/typeqsfind/CI)
 ![Travis (.com)](https://img.shields.io/travis/com/jcwatson11/typeqsfind)
+[![Coverage Status](https://coveralls.io/repos/jcwatson11/typeqsfind/badge.svg?branch=master)](https://coveralls.io/r/jcwatson11/typeqsfind?branch=master)
 
 # TypeORM Query String Translator
 
