@@ -88,6 +88,8 @@ greaterthan | WHERE Level > ? | ?greaterthanLevel=10
 greaterthanorequalto | WHERE Level >= ? | ?greaterthanorequaltoLevel=10
 lessthan | WHERE Level < ? | ?lessthanLevel=10
 lessthanorequalto | WHERE Level <= ? | ?lessthanorequaltoLevel=10
+with | (joins a table and selects) | ?with[]=Sponsors
+orderby | ORDER BY Name | ?orderbyName=DESC
 
 ## Referencing Nested Relations
 
@@ -113,3 +115,21 @@ SponsorId | FirstName | LastName | Phone | AmountCommitted | BeneficiaryId
 http://localhost:3000/beneficiaries?greaterthanSponsors.AmountCommitted=250
 // Returns Beneficiary 1
 ```
+
+## Extras
+
+### ORDER BY array syntax
+
+More than one order by can be used in either syntax. But the array syntax is simply a different preference.
+
+#### Example
+
+`?orderby[]=Name|DESC&orderby[]=Phone|ASC`
+
+### Providing an options object
+
+There are two different ways to provide an options JSON object to the request:
+
+1. As a base64 encoded string using the `options` query string parameter. `?options=base64EncodedString`
+1. As the request body. Using express bodyParser.json() is helpful for this because it automatically parses JSON input and makes it available via `request.body`.
+
