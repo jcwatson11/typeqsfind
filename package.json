@@ -42,15 +42,21 @@
       "ts-node": "3.3.0",
       "ts-sinon": "^2.0.1",
       "typeorm": "0.2.30",
-      "typescript": "3.3.3333"
+      "typescript": "3.9.x"
    },
    "scripts": {
       "test": "ts-mocha -p tsconfig.json 'src/**/*.spec.ts'",
-      "prepublish": "rm -rf dist && tsc --project tsconfig.json && cp dist/typeqs.d.ts src/typeqs.d.ts"
+      "prepublish": "rm -rf dist && tsc --project tsconfig.json",
+      "coverage": "nyc npm run test && shx cp .nojekyll ./coverage/.nojekyll",
+      "typedoc": "typedoc --out ./docs --exclude \"**/*.spec.ts,**/*.d.ts\" --tsconfig ./tsconfig.json ./src",
+      "posttypedoc": "shx cp .nojekyll docs/.nojekyll"
    },
    "main": "dist/typeqs.js",
    "types": "dist/typeqs.d.js",
    "devDependencies": {
-      "mocha-typescript": "^1.1.17"
+      "mocha-typescript": "^1.1.17",
+      "nyc": "^15.1.0",
+      "shx": "^0.3.3",
+      "typedoc": "^0.20.20"
    }
 }

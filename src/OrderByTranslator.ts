@@ -1,10 +1,6 @@
 import {Request} from 'express';
 import {FindManyOptions} from 'typeorm';
 
-export const uniqueFilter = (v: string, i: number, a: any): boolean => {
-  return a.indexOf(v) === i;
-};
-
 export class OrderByTranslator {
   // Set up some helper functions for orderby
   static catchOrderByFormatError(directionalOperator: string, originalValue: string): void {
@@ -45,7 +41,6 @@ export class OrderByTranslator {
       if(name.match(obMatcher)) {
         let fieldname: string = name.replace(/^orderby/,'');
         let direction: string = (req.query[name]) ? req.query[name].toString():'ASC';
-        if(!direction) direction = 'ASC';
         this.setSingleOrderBy(fieldname + '|' + direction, options);
       }
     }

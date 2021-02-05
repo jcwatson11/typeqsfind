@@ -5,9 +5,26 @@ import {FindManyOptions} from 'typeorm';
 import {expect} from 'chai';
 import {Request} from 'express';
 import {typeqs} from './typeqs';
+import {uniqueFilter} from './OrderByTranslator';
 const qt = typeqs.TranslateQuery;
 
 describe('With OrderByTranslator,', function() {
+
+  describe('while catching errors, it', function() {
+    it('can catch when a field does not have a directional operator', function() {
+      let req: any = { query: {} } as Request;
+      req.query.orderby = ['field1|FOO','field2'];
+      let expectedOptions: any = {
+         "skip": 0 
+        ,"take": 10
+        ,"order": {
+           "field1": "ASC"
+          ,"field2": "ASC"
+        }
+      } as FindManyOptions;
+      expect(qt.bind(this, req)).to.throw('orderby=field1|FOO does not have a proper directional operator.');
+    });
+  });
 
   describe('while processing orderby, it', function() {
     it('can properly set an orderby[]=field1&orderby[]=field2', function() {

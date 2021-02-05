@@ -8,7 +8,7 @@ export class OptionsTranslator {
     return buff.toString('utf-8');
   }
 
-  public static hasOptions(req: Request) {
+  public static hasOptions(req: Request): boolean {
     return (
       req.query.options !== undefined
       || req.body !== {}

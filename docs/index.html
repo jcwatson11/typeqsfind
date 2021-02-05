@@ -1,0 +1,374 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>typeqsfind</title>
+	<meta name="description" content="Documentation for typeqsfind">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">typeqsfind</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>typeqsfind</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><img src="https://img.shields.io/github/workflow/status/jcwatson11/typeqsfind/CI" alt="GitHub Workflow Status"></p>
+				<a href="#typeorm-query-string-translator" id="typeorm-query-string-translator" style="color: inherit; text-decoration: none;">
+					<h1>TypeORM Query String Translator</h1>
+				</a>
+				<p>Translates the HTTP Query String from an Express Request object to a TypeORM FindManyOptions object.</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code class="language-bash"><span style="color: #000000">npm i -S typeqsfind</span>
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p>The example below presumes that you have a database configured with a single table named &#39;user&#39;</p>
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Level</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>1</td>
+							<td>Jon</td>
+							<td>9</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Nancy</td>
+							<td>11</td>
+						</tr>
+				</tbody></table>
+				<pre><code class="language-TypeScript"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">typeqs</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;typeqsfind&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">FindManyOptions</span><span style="color: #000000">, </span><span style="color: #001080">createConnection</span><span style="color: #000000">, </span><span style="color: #001080">Repository</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;typeorm&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">express</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;express&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">Request</span><span style="color: #000000">, </span><span style="color: #001080">Response</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;express&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">User</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./entity/User&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">ormconfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;./ormconfig&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">app</span><span style="color: #000000"> = </span><span style="color: #795E26">express</span><span style="color: #000000">();</span>
+
+<span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">conn</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">createConnection</span><span style="color: #000000">(</span><span style="color: #001080">ormconfig</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">app</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;/users&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">req</span><span style="color: #000000">: </span><span style="color: #267F99">Request</span><span style="color: #000000">, </span><span style="color: #001080">res</span><span style="color: #000000">: </span><span style="color: #267F99">Response</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">myOptions</span><span style="color: #000000">: </span><span style="color: #267F99">FindManyOptions</span><span style="color: #000000"> = </span><span style="color: #001080">typeqs</span><span style="color: #000000">.</span><span style="color: #795E26">TranslateQuery</span><span style="color: #000000">(</span><span style="color: #001080">request</span><span style="color: #000000">);</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">// myOptions is now a TypeORM FindManyOptions object taken from the query string</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">repo</span><span style="color: #000000"> = </span><span style="color: #795E26">getRepository</span><span style="color: #000000">(</span><span style="color: #001080">User</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">results</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">repo</span><span style="color: #000000">.</span><span style="color: #795E26">find</span><span style="color: #000000">(</span><span style="color: #001080">myOptions</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #001080">res</span><span style="color: #000000">.</span><span style="color: #795E26">json</span><span style="color: #000000">(</span><span style="color: #001080">results</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #001080">app</span><span style="color: #000000">.</span><span style="color: #795E26">listen</span><span style="color: #000000">(</span><span style="color: #098658">3000</span><span style="color: #000000">);</span>
+
+</code></pre>
+				<a href="#example-queries" id="example-queries" style="color: inherit; text-decoration: none;">
+					<h2>Example Queries</h2>
+				</a>
+				<pre><code><span style="color: #0070C1">GET</span><span style="color: #000000"> http:</span><span style="color: #008000">//localhost:3000/users?whereName=Jon</span>
+<span style="color: #008000">// Returns record 1</span>
+</code></pre>
+				<pre><code><span style="color: #0070C1">GET</span><span style="color: #000000"> http:</span><span style="color: #008000">//localhost:3000/users?whereName=Nancy</span>
+<span style="color: #008000">// Returns record 2</span>
+</code></pre>
+				<pre><code><span style="color: #0070C1">GET</span><span style="color: #000000"> http:</span><span style="color: #008000">//localhost:3000/users?greaterthanLevel=10</span>
+<span style="color: #008000">// Returns record 2</span>
+</code></pre>
+				<a href="#production-warning" id="production-warning" style="color: inherit; text-decoration: none;">
+					<h2>Production warning</h2>
+				</a>
+				<p>This code is in experimental status. Using this code in production should only happen if you have completed extensive testing after integration with your own software.</p>
+				<a href="#supported-features" id="supported-features" style="color: inherit; text-decoration: none;">
+					<h2>Supported features</h2>
+				</a>
+				<ul>
+					<li>Supports referencing nested relationships from the query string.</li>
+					<li>Supports all common simple clause types (listed below)</li>
+					<li>Supports sending a JSON object either encoded on the query string, or in the request body that will become the options object that you want. This is used as a starting point (if provided) to add more parameters to as provided from the query string.</li>
+					<li>Supports typescript.</li>
+					<li>Preliminary tests have been completed.</li>
+				</ul>
+				<a href="#supported-query-string-operators" id="supported-query-string-operators" style="color: inherit; text-decoration: none;">
+					<h2>Supported Query String Operators</h2>
+				</a>
+				<p>The following query string parameters are supported, and will be translated in the following ways:</p>
+				<p><code>NOTE: The query string examples in the Example column have not been properly URLEncoded. Please always make sure your query strings are properly encoded.</code></p>
+				<table>
+					<thead>
+						<tr>
+							<th>Prefix</th>
+							<th>SQL equivalent</th>
+							<th>Query String Example</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>limit</td>
+							<td>LIMIT ? (Default 10)</td>
+							<td>?limit=100</td>
+						</tr>
+						<tr>
+							<td>where</td>
+							<td>WHERE Name = ?</td>
+							<td>?whereName=Jon</td>
+						</tr>
+						<tr>
+							<td>orwhere</td>
+							<td>WHERE (Name = ? OR Name = ?</td>
+							<td>?orwhereName[]=Jon&amp;orwhereName[]=Nancy</td>
+						</tr>
+						<tr>
+							<td>inarray</td>
+							<td>WHERE Name IN (?,?)</td>
+							<td>?inarrayName[]=Jon&amp;inarrayName[]=Nancy</td>
+						</tr>
+						<tr>
+							<td>notinarray</td>
+							<td>WHERE Name NOT IN (?,?)</td>
+							<td>?notinarrayName[]=Jon&amp;notinarrayName[]=Nancy</td>
+						</tr>
+						<tr>
+							<td>between</td>
+							<td>WHERE Name BETWEEN ? AND ?</td>
+							<td>?betweenLevel[]=4&amp;betweenLevel[]=10</td>
+						</tr>
+						<tr>
+							<td>isnull</td>
+							<td>WHERE Name IS NULL</td>
+							<td>?isnullName</td>
+						</tr>
+						<tr>
+							<td>isnotnull</td>
+							<td>WHERE Name IS NOT NULL</td>
+							<td>?isnotnullName</td>
+						</tr>
+						<tr>
+							<td>like</td>
+							<td>WHERE Name LIKE ?</td>
+							<td>?likeName=%Jon%</td>
+						</tr>
+						<tr>
+							<td>ilike</td>
+							<td>WHERE Name ILIKE ?</td>
+							<td>?ilikeName=%jon%</td>
+						</tr>
+						<tr>
+							<td>greaterthan</td>
+							<td>WHERE Level &gt; ?</td>
+							<td>?greaterthanLevel=10</td>
+						</tr>
+						<tr>
+							<td>greaterthanorequalto</td>
+							<td>WHERE Level &gt;= ?</td>
+							<td>?greaterthanorequaltoLevel=10</td>
+						</tr>
+						<tr>
+							<td>lessthan</td>
+							<td>WHERE Level &lt; ?</td>
+							<td>?lessthanLevel=10</td>
+						</tr>
+						<tr>
+							<td>lessthanorequalto</td>
+							<td>WHERE Level &lt;= ?</td>
+							<td>?lessthanorequaltoLevel=10</td>
+						</tr>
+						<tr>
+							<td>with</td>
+							<td>(joins a table and selects)</td>
+							<td>?with[]=Sponsors</td>
+						</tr>
+						<tr>
+							<td>orderby</td>
+							<td>ORDER BY Name</td>
+							<td>?orderbyName=DESC</td>
+						</tr>
+				</tbody></table>
+				<a href="#referencing-nested-relations" id="referencing-nested-relations" style="color: inherit; text-decoration: none;">
+					<h2>Referencing Nested Relations</h2>
+				</a>
+				<p>Nested relations can be referenced with a dot operator between relation names and field names.</p>
+				<p>Consider a fundraiser schema as follows:</p>
+				<a href="#table-beneficiaries" id="table-beneficiaries" style="color: inherit; text-decoration: none;">
+					<h3>Table Beneficiaries</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>BenficiaryId</th>
+							<th>FirstName</th>
+							<th>LastName</th>
+							<th>Phone</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>1</td>
+							<td>Jon</td>
+							<td>Watson</td>
+							<td>555-1212</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Sherlock</td>
+							<td>Holmes</td>
+							<td>555-2121</td>
+						</tr>
+				</tbody></table>
+				<a href="#table-sponsors" id="table-sponsors" style="color: inherit; text-decoration: none;">
+					<h3>Table Sponsors</h3>
+				</a>
+				<table>
+					<thead>
+						<tr>
+							<th>SponsorId</th>
+							<th>FirstName</th>
+							<th>LastName</th>
+							<th>Phone</th>
+							<th>AmountCommitted</th>
+							<th>BeneficiaryId</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td>1</td>
+							<td>Jill</td>
+							<td>Clemons</td>
+							<td>555-1111</td>
+							<td>300</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Fred</td>
+							<td>Baker</td>
+							<td>555-2222</td>
+							<td>200</td>
+							<td>2</td>
+						</tr>
+				</tbody></table>
+				<pre><code><span style="color: #000000">http:</span><span style="color: #008000">//localhost:3000/beneficiaries?greaterthanSponsors.AmountCommitted=250</span>
+<span style="color: #008000">// Returns Beneficiary 1</span>
+</code></pre>
+				<a href="#extras" id="extras" style="color: inherit; text-decoration: none;">
+					<h2>Extras</h2>
+				</a>
+				<a href="#order-by-array-syntax" id="order-by-array-syntax" style="color: inherit; text-decoration: none;">
+					<h3>ORDER BY array syntax</h3>
+				</a>
+				<p>More than one order by can be used in either syntax. But the array syntax is simply a different preference.</p>
+				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+					<h4>Example</h4>
+				</a>
+				<p><code>?orderby[]=Name|DESC&amp;orderby[]=Phone|ASC</code></p>
+				<a href="#providing-an-options-object" id="providing-an-options-object" style="color: inherit; text-decoration: none;">
+					<h3>Providing an options object</h3>
+				</a>
+				<p>There are two different ways to provide an options JSON object to the request:</p>
+				<ol>
+					<li>As a base64 encoded string using the <code>options</code> query string parameter. <code>?options=base64EncodedString</code></li>
+					<li>As the request body. Using express <a href="http://expressjs.com/en/resources/middleware/body-parser.html">bodyParser.json()</a> is helpful for this because it automatically parses JSON input and makes it available via <code>request.body</code>.</li>
+				</ol>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/optionstranslator.html">Options<wbr>Translator</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/orderbytranslator.html">Order<wbr>ByTranslator</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/paginationtranslator.html">Pagination<wbr>Translator</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/wheretranslator.html">Where<wbr>Translator</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/withtranslator.html">With<wbr>Translator</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/typeqs.html">typeqs</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

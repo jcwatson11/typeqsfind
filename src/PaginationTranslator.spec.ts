@@ -20,10 +20,22 @@ describe('With PaginationTranslator,', function() {
       expect(options).to.deep.equal(expectedOptions);
     });
 
-    it('can properly set the skip and take options', function() {
+    it('can properly set the skip and take options with limit and offset', function() {
       let req: any = { query: {} } as Request;
       req.query.limit = 20;
       req.query.offset = 40;
+      let expectedOptions: any = {
+         "skip": 40 
+        ,"take": 20
+      } as FindManyOptions;
+      let options: FindManyOptions = qt(req);
+      expect(options).to.deep.equal(expectedOptions);
+    });
+
+    it('can properly set the skip and take options with start and limit', function() {
+      let req: any = { query: {} } as Request;
+      req.query.limit = 20;
+      req.query.start = 40;
       let expectedOptions: any = {
          "skip": 40 
         ,"take": 20
