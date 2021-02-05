@@ -86,8 +86,8 @@ like | WHERE Name LIKE ? | ?likeName=%Jon%
 ilike | WHERE Name ILIKE ? | ?ilikeName=%jon%
 greaterthan | WHERE Level > ? | ?greaterthanLevel=10
 greaterthanorequalto | WHERE Level >= ? | ?greaterthanorequaltoLevel=10
-lessthan | WHERE Level < | ?lessthanLevel=10
-lessthanorequalto | WHERE Level <= | ?lessthanorequaltoLevel=10
+lessthan | WHERE Level < ? | ?lessthanLevel=10
+lessthanorequalto | WHERE Level <= ? | ?lessthanorequaltoLevel=10
 
 ## Referencing Nested Relations
 
