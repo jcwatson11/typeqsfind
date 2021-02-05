@@ -1,3 +1,5 @@
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jcwatson11/typeqsfind/CI)
+
 # TypeORM Query String Translator
 
 Translates the HTTP Query String from an Express Request object to a TypeORM FindManyOptions object.
